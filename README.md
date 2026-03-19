@@ -1,0 +1,1 @@
+# stridy-project
