@@ -1,0 +1,60 @@
+/* ─── APP LAYOUT ─────────────────────────────────────────────────────────────── */
+
+.layout {
+  display: grid;
+  grid-template-columns: var(--sidebar-width) 1fr;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.sidebar {
+  height: 100vh;
+  overflow: hidden;
+  border-right: 1px solid var(--border);
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.content {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--space-8);
+}
+
+/* Bottom nav oculto en desktop */
+.bottomNav {
+  display: none;
+}
+
+/* ── Responsive móvil ────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  /* Ocultar sidebar en móvil */
+  .sidebar {
+    display: none;
+  }
+
+  .content {
+    padding: var(--space-4);
+    /* Dejar espacio para el bottom nav */
+    padding-bottom: calc(var(--bottomnav-height) + var(--space-4));
+  }
+
+  /* Mostrar bottom nav en móvil */
+  .bottomNav {
+    display: block;
+    height: var(--bottomnav-height);
+    border-top: 1px solid var(--border);
+    background: var(--surface);
+    flex-shrink: 0;
+  }
+}

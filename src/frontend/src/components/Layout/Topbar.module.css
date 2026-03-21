@@ -1,0 +1,126 @@
+/* ─── TOPBAR ──────────────────────────────────────────────────────────────────── */
+
+.topbar {
+  height: var(--topbar-height);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  padding: 0 var(--space-8);
+  gap: var(--space-3);
+  flex-shrink: 0;
+  background: var(--surface);
+}
+
+.titleBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.title {
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.greeting {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.spacer { flex: 1; }
+
+.avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: var(--accent-soft);
+  border: 1px solid var(--accent-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--accent);
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+/* Hamburguesa — oculto en desktop */
+.menuBtn {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: var(--surface-2);
+  border: 1px solid var(--border-2);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: var(--transition);
+}
+
+.menuBtn:hover {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.menuBar {
+  width: 16px;
+  height: 2px;
+  background: var(--text);
+  border-radius: 1px;
+}
+
+.menuBarShort {
+  width: 11px;
+  align-self: flex-start;
+  margin-left: 3px;
+}
+
+/* Logo móvil — oculto en desktop */
+.logoMobile { display: none; }
+
+/* ── Responsive ──────────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+
+  .topbar {
+    padding: 0 var(--space-4);
+  }
+
+  .menuBtn {
+    display: flex;
+  }
+
+  .logoMobile {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  }
+
+  .logoMark {
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    background: var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 800;
+    color: #fff;
+  }
+
+  .logoName {
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
+  /* Ocultar título desktop en móvil */
+  .titleBlock { display: none; }
+}

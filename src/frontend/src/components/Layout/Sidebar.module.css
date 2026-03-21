@@ -1,0 +1,245 @@
+/* ─── SIDEBAR ─────────────────────────────────────────────────────────────────── */
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: var(--surface);
+  overflow: hidden;
+}
+
+/* Logo */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 20px 16px 16px;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.logoMark {
+  width: 32px;
+  height: 32px;
+  border-radius: 9px;
+  background: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 800;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.logoName {
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.logoBeta {
+  font-size: 11px;
+  color: var(--text-muted);
+  background: var(--surface-3);
+  padding: 2px 7px;
+  border-radius: 5px;
+  margin-left: auto;
+}
+
+/* Body */
+.body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 10px 8px;
+}
+
+/* Sección */
+.section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 10px 5px;
+}
+
+.sectionLabel {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.addBtn {
+  width: 24px;
+  height: 24px;
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--accent);
+  background: var(--accent-soft);
+  border: 1px solid var(--accent-border);
+  cursor: pointer;
+  transition: var(--transition);
+  line-height: 1;
+}
+
+.addBtn:hover {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+
+/* Nav items */
+.navItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 10px;
+  border-radius: 9px;
+  cursor: pointer;
+  color: var(--text-muted);
+  font-size: 14px;
+  margin-bottom: 2px;
+  text-decoration: none;
+  transition: var(--transition);
+  user-select: none;
+}
+
+.navItem:hover {
+  background: var(--surface-2);
+  color: var(--text);
+}
+
+.navItem.active {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.navIcon {
+  font-size: 15px;
+  width: 20px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+/* Instituciones */
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.instName {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.count {
+  font-size: 11px;
+  background: var(--surface-3);
+  padding: 2px 7px;
+  border-radius: 5px;
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+/* Amigos */
+.friendItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  border-radius: 9px;
+  cursor: pointer;
+  transition: var(--transition);
+  margin-bottom: 2px;
+}
+
+.friendItem:hover { background: var(--surface-2); }
+
+.friendAvatar {
+  width: 26px;
+  height: 26px;
+  border-radius: 7px;
+  background: var(--surface-3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 700;
+  flex-shrink: 0;
+  color: var(--text-muted);
+}
+
+.friendName {
+  font-size: 13px;
+  flex: 1;
+  color: var(--text-muted);
+}
+
+.friendStatus {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.empty {
+  font-size: 12px;
+  color: var(--text-dim);
+  padding: 6px 10px;
+  font-style: italic;
+}
+
+/* Footer */
+.footer {
+  padding: 10px 8px;
+  border-top: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.userCard {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.userCard:hover { background: var(--surface-2); }
+
+.userAvatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: var(--accent-soft);
+  border: 1px solid var(--accent-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--accent);
+  flex-shrink: 0;
+}
+
+.userName {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.userKey {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 1px;
+}
