@@ -36,16 +36,24 @@ FORMATO REQUERIDO (array JSON puro):
 El campo "correct" es el índice (0=A, 1=B, 2=C, 3=D).`;
 
 const FREE_MODELS = [
-  'mistralai/mistral-small-3.1-24b-instruct:free',
+  'nvidia/nemotron-nano-12b-v2-vl:free',
+  'stepfun/step-3.5-flash:free',
+  'arcee-ai/trinity-mini:free',
+  'liquid/lfm-2.5-1.2b-instruct:free',
   'google/gemma-3n-e4b-it:free',
-  'openai/gpt-oss-20b:free',
-  'qwen/qwen3-4b:free',
+  'minimax/minimax-m2.5:free',
 ];
+
+const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
 async function callOpenRouter(messages: any[]) {
   let lastError = '';
 
-  for (const model of FREE_MODELS) {
+  for (let i = 0; i < FREE_MODELS.length; i++) {
+    const model = FREE_MODELS[i];
+
+    if (i > 0) await sleep(1000); 
+
     const res = await fetch('https://openrouter.ai/api/v1/chat/completions', {
       method: 'POST',
       headers: {
