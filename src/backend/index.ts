@@ -26,17 +26,17 @@ app.use('*', cors({
 }));
 
 // ── Health check ──────────────────────────────────────────────────────────────
-app.get('/health', (c) => c.json({ status: 'ok', app: 'Stridy API' }));
+app.get('/api/health', (c) => c.json({ status: 'ok', app: 'Stridy API' }));
 
 // ── Rutas ─────────────────────────────────────────────────────────────────────
-app.route('/auth',         auth);
-app.route('/institutions', institutions);
-app.route('/subjects',     subjects);
-app.route('/grades',       grades);
-app.route('/events',       events);
-app.route('/schedule',     schedule);
-app.route('/friends',      friends);
-app.route('/ai',           ai);
+app.route('/api/auth',         auth);
+app.route('/api/institutions', institutions);
+app.route('/api/subjects',     subjects);
+app.route('/api/grades',       grades);
+app.route('/api/events',       events);
+app.route('/api/schedule',     schedule);
+app.route('/api/friends',      friends);
+app.route('/api/ai',           ai);
 
 // ── 404 ───────────────────────────────────────────────────────────────────────
 app.notFound((c) => c.json({ error: 'Ruta no encontrada' }, 404));
