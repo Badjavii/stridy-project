@@ -1,12 +1,19 @@
 {
-  "name": "backend",
-  "module": "index.ts",
-  "type": "module",
-  "private": true,
-  "devDependencies": {
-    "@types/bun": "latest"
+  "name": "stridy-backend",
+  "version": "1.0.0",
+  "scripts": {
+    "dev":   "bun --watch index.ts",
+    "start": "bun index.ts"
   },
-  "peerDependencies": {
-    "typescript": "^5"
+  "dependencies": {
+    "hono":                "^4.6.3",
+    "@hono/node-server":   "^1.13.2",
+    "pg":                  "^8.13.1",
+    "jose":                "^5.9.6",
+    "uuid":                "^10.0.0"
+  },
+  "devDependencies": {
+    "@types/pg":           "^8.11.10",
+    "bun-types":           "latest"
   }
 }
