@@ -1,5 +1,21 @@
+# Dependencias
 node_modules/
+
+# Build
 dist/
+
+# Variables de entorno
 .env
 .env.local
-*.lock
+.env.*.local
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
