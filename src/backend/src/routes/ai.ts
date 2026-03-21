@@ -35,27 +35,38 @@ FORMATO REQUERIDO (array JSON puro):
 
 El campo "correct" es el índice (0=A, 1=B, 2=C, 3=D).`;
 
-async function callOpenRouter(messages: any[]) {
-  const res = await fetch('https://openrouter.ai/api/v1/chat/completions', {
-    method: 'POST',
-    headers: {
-      'Content-Type':    'application/json',
-      'Authorization':   `Bearer ${env.OPENROUTER_API_KEY}`,
-      'X-OpenRouter-Title': 'Stridy',
-    },
-    body: JSON.stringify({
-      model:    env.OPENROUTER_MODEL,
-      messages,
-    }),
-  });
+const FREE_MODELS = [
+  'mistralai/mistral-small-3.1-24b-instruct:free',
+  'google/gemma-3n-e4b-it:free',
+  'openai/gpt-oss-20b:free',
+  'qwen/qwen3-4b:free',
+];
 
-  if (!res.ok) {
+async function callOpenRouter(messages: any[]) {
+  let lastError = '';
+
+  for (const model of FREE_MODELS) {
+    const res = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type':       'application/json',
+        'Authorization':      `Bearer ${env.OPENROUTER_API_KEY}`,
+        'X-OpenRouter-Title': 'Stridy',
+      },
+      body: JSON.stringify({ model, messages }),
+    });
+
+    if (res.ok) {
+      const data = await res.json();
+      return data.choices?.[0]?.message?.content ?? '';
+    }
+
     const err = await res.text();
-    throw new Error(`OpenRouter error: ${err}`);
+    lastError = err;
+    console.warn(`Modelo ${model} falló, probando siguiente...`);
   }
 
-  const data = await res.json();
-  return data.choices?.[0]?.message?.content ?? '';
+  throw new Error(`Todos los modelos fallaron. Último error: ${lastError}`);
 }
 
 // POST /ai/chat
