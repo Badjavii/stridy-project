@@ -13,6 +13,7 @@ export default function Register() {
   const [copied, setCopied] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError]   = useState('');
+  const [userData, setUserData] = useState(null);
 
   const { login } = useAuth();
   const navigate  = useNavigate();
@@ -23,9 +24,8 @@ export default function Register() {
     setError('');
     try {
       const data = await register();
-      // data = { access_key, username, token }
       setKey(data.access_key);
-      login({ username: data.username });
+      setUserData(data);
       setStep(STEPS.KEY);
     } catch (err) {
       setError(err.message || 'Error al crear la cuenta');
@@ -40,7 +40,10 @@ export default function Register() {
     setTimeout(() => setCopied(false), 2000);
   };
 
-  const handleContinue = () => navigate('/');
+  const handleContinue = () => {
+    login({ username: userData.username });
+    navigate('/');
+  }
 
   // ── Paso 1: Advertencia ──────────────────────────────────────────────────────
   if (step === STEPS.WARNING) return (
