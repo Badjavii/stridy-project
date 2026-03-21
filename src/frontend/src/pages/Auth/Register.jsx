@@ -35,7 +35,16 @@ export default function Register() {
   };
 
   const handleCopy = () => {
-    navigator.clipboard.writeText(key);
+    try {
+      navigator.clipboard.writeText(key);
+    } catch {
+      const el = document.createElement('textarea');
+      el.value = key;
+      document.body.appendChild(el);
+      el.select();
+      document.execCommand('copy');
+      document.body.removeChild(el);
+    }
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
