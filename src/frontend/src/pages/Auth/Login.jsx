@@ -17,7 +17,7 @@ export default function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const cleaned = key.replace(/\s/g, '');
+    const cleaned = key.replace(/[-\s]/g, '');
     if (cleaned.length !== 16) {
       setError('La clave debe tener exactamente 16 caracteres');
       return;
