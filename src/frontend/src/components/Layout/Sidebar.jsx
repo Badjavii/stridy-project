@@ -1,11 +1,13 @@
 // ─── SIDEBAR ──────────────────────────────────────────────────────────────────
+import { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../store/AuthContext';
 import { useApp }  from '../../store/AppContext';
+import { updateUsername } from '../../api/auth';
 import styles      from './Sidebar.module.css';
 
 const NAV_ITEMS = [
-  { to: '/',            label: 'Inicio',      icon: '⌂',  end: true },
+  { to: '/',           label: 'Inicio',      icon: '⌂',  end: true },
   { to: '/calendar',   label: 'Calendario',  icon: '📅' },
   { to: '/schedule',   label: 'Horario',     icon: '🗓' },
   { to: '/tests',      label: 'Tests IA',    icon: '🧠' },
@@ -13,13 +15,32 @@ const NAV_ITEMS = [
 ];
 
 export default function Sidebar() {
-  const { user, logout }           = useAuth();
-  const { institutions, friends }  = useApp();
-  const navigate                   = useNavigate();
+  const { user, logout, updateUser }  = useAuth();
+  const { institutions, friends }     = useApp();
+  const navigate                      = useNavigate();
+
+  const [editingUsername, setEditingUsername] = useState(false);
+  const [newUsername, setNewUsername]         = useState('');
+  const [savingUsername, setSavingUsername]   = useState(false);
 
   const handleLogout = () => {
     logout();
     navigate('/login');
+  };
+
+  const handleUsernameEdit = async () => {
+    if (!newUsername.trim()) return;
+    setSavingUsername(true);
+    try {
+      const formatted = newUsername.startsWith('@') ? newUsername : `@${newUsername}`;
+      await updateUsername(formatted);
+      updateUser({ username: formatted });
+      setEditingUsername(false);
+    } catch (err) {
+      alert(err.message);
+    } finally {
+      setSavingUsername(false);
+    }
   };
 
   return (
@@ -70,10 +91,7 @@ export default function Sidebar() {
               `${styles.navItem} ${isActive ? styles.active : ''}`
             }
           >
-            <span
-              className={styles.dot}
-              style={{ background: inst.color }}
-            />
+            <span className={styles.dot} style={{ background: inst.color }} />
             <span className={styles.instName}>{inst.name}</span>
             <span className={styles.count}>{inst.subject_count ?? 0}</span>
           </NavLink>
@@ -117,15 +135,62 @@ export default function Sidebar() {
 
       {/* Footer usuario */}
       <div className={styles.footer}>
-        <div className={styles.userCard} onClick={handleLogout} title="Cerrar sesión">
-          <div className={styles.userAvatar}>
-            {user?.username?.slice(1, 3).toUpperCase() ?? 'ST'}
+        {editingUsername ? (
+          <div className={styles.usernameEditRow}>
+            <input
+              className={styles.usernameInput}
+              value={newUsername}
+              onChange={e => setNewUsername(e.target.value)}
+              placeholder="@nuevo_username"
+              autoFocus
+              onKeyDown={e => {
+                if (e.key === 'Enter') handleUsernameEdit();
+                if (e.key === 'Escape') setEditingUsername(false);
+              }}
+            />
+            <button
+              className={styles.saveBtn}
+              onClick={handleUsernameEdit}
+              disabled={savingUsername}
+            >
+              {savingUsername ? '…' : '✓'}
+            </button>
+            <button
+              className={styles.cancelBtn}
+              onClick={() => setEditingUsername(false)}
+            >
+              ✕
+            </button>
           </div>
-          <div>
-            <div className={styles.userName}>{user?.username ?? '@usuario'}</div>
-            <div className={styles.userKey}>Cerrar sesión</div>
+        ) : (
+          <div className={styles.userCard}>
+            <div
+              className={styles.userAvatar}
+              onClick={() => { setNewUsername(user?.username ?? ''); setEditingUsername(true); }}
+              title="Editar username"
+            >
+              {user?.username?.slice(1, 3).toUpperCase() ?? 'ST'}
+            </div>
+            <div style={{ flex: 1, minWidth: 0 }}>
+              <div
+                className={styles.userName}
+                onClick={() => { setNewUsername(user?.username ?? ''); setEditingUsername(true); }}
+                style={{ cursor: 'pointer' }}
+                title="Editar username"
+              >
+                {user?.username ?? '@usuario'}
+              </div>
+              <div
+                className={styles.userKey}
+                onClick={handleLogout}
+                style={{ cursor: 'pointer' }}
+                title="Cerrar sesión"
+              >
+                Cerrar sesión
+              </div>
+            </div>
           </div>
-        </div>
+        )}
       </div>
 
     </div>

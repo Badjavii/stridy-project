@@ -243,3 +243,47 @@
   color: var(--text-muted);
   margin-top: 1px;
 }
+
+.usernameEditRow {
+  display: flex;
+  gap: 6px;
+  padding: 8px 10px;
+  align-items: center;
+}
+
+.usernameInput {
+  flex: 1;
+  padding: 7px 10px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--accent-border);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 13px;
+  font-family: inherit;
+  outline: none;
+  min-width: 0;
+}
+
+.usernameInput:focus { border-color: var(--accent); }
+
+.saveBtn {
+  padding: 7px 10px;
+  border-radius: var(--radius-sm);
+  border: none;
+  background: var(--accent);
+  color: #fff;
+  cursor: pointer;
+  font-size: 13px;
+  flex-shrink: 0;
+}
+
+.cancelBtn {
+  padding: 7px 10px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-2);
+  background: var(--surface-2);
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 13px;
+  flex-shrink: 0;
+}
