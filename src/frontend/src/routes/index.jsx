@@ -5,6 +5,7 @@ import { useAuth } from '../store/AuthContext';
 // Páginas públicas
 import Register from '../pages/Auth/Register';
 import Login    from '../pages/Auth/Login';
+import Profile from '../pages/Profile/Profile.jsx';
 
 // Layout autenticado
 import AppLayout from '../components/Layout/AppLayout';
@@ -52,6 +53,7 @@ export default function AppRouter() {
           <PrivateRoute><AppLayout /></PrivateRoute>
         }>
           <Route index                          element={<Dashboard />} />
+          <Route path="profile"                 element={<Profile />} />
           <Route path="institutions"            element={<InstitutionList />} />
           <Route path="subjects"                element={<SubjectList />} />
           <Route path="subjects/:id"            element={<SubjectDetail />} />

@@ -1,9 +1,7 @@
 // ─── SIDEBAR ──────────────────────────────────────────────────────────────────
-import { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../store/AuthContext';
 import { useApp }  from '../../store/AppContext';
-import { updateUsername } from '../../api/auth';
 import styles      from './Sidebar.module.css';
 
 const NAV_ITEMS = [
@@ -15,32 +13,13 @@ const NAV_ITEMS = [
 ];
 
 export default function Sidebar() {
-  const { user, logout, updateUser }  = useAuth();
-  const { institutions, friends }     = useApp();
-  const navigate                      = useNavigate();
-
-  const [editingUsername, setEditingUsername] = useState(false);
-  const [newUsername, setNewUsername]         = useState('');
-  const [savingUsername, setSavingUsername]   = useState(false);
+  const { user, logout }          = useAuth();
+  const { institutions, friends } = useApp();
+  const navigate                  = useNavigate();
 
   const handleLogout = () => {
     logout();
     navigate('/login');
-  };
-
-  const handleUsernameEdit = async () => {
-    if (!newUsername.trim()) return;
-    setSavingUsername(true);
-    try {
-      const formatted = newUsername.startsWith('@') ? newUsername : `@${newUsername}`;
-      await updateUsername(formatted);
-      updateUser({ username: formatted });
-      setEditingUsername(false);
-    } catch (err) {
-      alert(err.message);
-    } finally {
-      setSavingUsername(false);
-    }
   };
 
   return (
@@ -133,64 +112,30 @@ export default function Sidebar() {
         )}
       </div>
 
-      {/* Footer usuario */}
+      {/* Footer */}
       <div className={styles.footer}>
-        {editingUsername ? (
-          <div className={styles.usernameEditRow}>
-            <input
-              className={styles.usernameInput}
-              value={newUsername}
-              onChange={e => setNewUsername(e.target.value)}
-              placeholder="@nuevo_username"
-              autoFocus
-              onKeyDown={e => {
-                if (e.key === 'Enter') handleUsernameEdit();
-                if (e.key === 'Escape') setEditingUsername(false);
-              }}
-            />
-            <button
-              className={styles.saveBtn}
-              onClick={handleUsernameEdit}
-              disabled={savingUsername}
-            >
-              {savingUsername ? '…' : '✓'}
-            </button>
-            <button
-              className={styles.cancelBtn}
-              onClick={() => setEditingUsername(false)}
-            >
-              ✕
-            </button>
+        <div className={styles.userInfo}>
+          <div className={styles.userAvatar}>
+            {user?.username?.slice(1, 3).toUpperCase() ?? 'ST'}
           </div>
-        ) : (
-          <div className={styles.userCard}>
-            <div
-              className={styles.userAvatar}
-              onClick={() => { setNewUsername(user?.username ?? ''); setEditingUsername(true); }}
-              title="Editar username"
-            >
-              {user?.username?.slice(1, 3).toUpperCase() ?? 'ST'}
-            </div>
-            <div style={{ flex: 1, minWidth: 0 }}>
-              <div
-                className={styles.userName}
-                onClick={() => { setNewUsername(user?.username ?? ''); setEditingUsername(true); }}
-                style={{ cursor: 'pointer' }}
-                title="Editar username"
-              >
-                {user?.username ?? '@usuario'}
-              </div>
-              <div
-                className={styles.userKey}
-                onClick={handleLogout}
-                style={{ cursor: 'pointer' }}
-                title="Cerrar sesión"
-              >
-                Cerrar sesión
-              </div>
-            </div>
-          </div>
-        )}
+          <span className={styles.userName}>{user?.username ?? '@usuario'}</span>
+        </div>
+        <div className={styles.footerBtns}>
+          <button
+            className={styles.profileBtn}
+            onClick={() => navigate('/profile')}
+            title="Perfil"
+          >
+            ⚙ Perfil
+          </button>
+          <button
+            className={styles.logoutBtn}
+            onClick={handleLogout}
+            title="Cerrar sesión"
+          >
+            ↩ Salir
+          </button>
+        </div>
       </div>
 
     </div>

@@ -1,0 +1,210 @@
+/* ─── PROFILE ────────────────────────────────────────────────────────────────── */
+
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  max-width: 560px;
+  animation: fadeIn 0.25s ease forwards;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.backBtn {
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  transition: var(--transition);
+  padding: 0;
+}
+
+.backBtn:hover { color: var(--text); }
+
+.title {
+  font-size: var(--text-xl);
+  font-weight: var(--font-bold);
+  letter-spacing: -0.02em;
+}
+
+/* Avatar section */
+.avatarSection {
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+  padding: var(--space-6);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+}
+
+.avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 16px;
+  background: var(--accent-soft);
+  border: 1px solid var(--accent-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  font-weight: var(--font-black);
+  color: var(--accent);
+  flex-shrink: 0;
+}
+
+.currentUsername {
+  font-size: var(--text-lg);
+  font-weight: var(--font-bold);
+  letter-spacing: -0.02em;
+}
+
+.joinDate {
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+  margin-top: var(--space-1);
+  text-transform: capitalize;
+}
+
+/* Cards */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.cardTitle {
+  font-size: var(--text-base);
+  font-weight: var(--font-semi);
+}
+
+.cardDesc {
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* Form */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  margin-top: var(--space-2);
+}
+
+.inputGroup {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--border-2);
+  border-radius: var(--radius-md);
+  background: var(--bg);
+  overflow: hidden;
+  transition: var(--transition);
+}
+
+.inputGroup:focus-within {
+  border-color: var(--accent);
+}
+
+.inputPrefix {
+  padding: 0 var(--space-3);
+  font-size: var(--text-base);
+  color: var(--text-muted);
+  font-weight: var(--font-semi);
+  background: var(--surface-2);
+  border-right: 1px solid var(--border-2);
+  height: 42px;
+  display: flex;
+  align-items: center;
+}
+
+.input {
+  flex: 1;
+  padding: var(--space-3) var(--space-4);
+  background: transparent;
+  color: var(--text);
+  font-size: var(--text-base);
+  font-family: inherit;
+  border: none;
+  outline: none;
+}
+
+.input::placeholder { color: var(--text-dim); }
+
+/* Buttons */
+.btnPrimary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-3) var(--space-5);
+  border-radius: var(--radius-md);
+  border: none;
+  background: var(--accent);
+  color: #fff;
+  font-size: var(--text-sm);
+  font-weight: var(--font-semi);
+  cursor: pointer;
+  transition: var(--transition);
+  font-family: inherit;
+  align-self: flex-start;
+}
+
+.btnPrimary:hover:not(:disabled) { background: var(--accent-hover); }
+.btnPrimary:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.btnDanger {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-3) var(--space-5);
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(232,83,78,0.4);
+  background: transparent;
+  color: var(--red);
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  cursor: pointer;
+  transition: var(--transition);
+  font-family: inherit;
+  align-self: flex-start;
+}
+
+.btnDanger:hover { background: var(--red-soft); }
+
+/* Messages */
+.error {
+  font-size: var(--text-sm);
+  color: var(--red);
+  padding: var(--space-3) var(--space-4);
+  background: var(--red-soft);
+  border: 1px solid rgba(232,83,78,0.2);
+  border-radius: var(--radius-md);
+}
+
+.success {
+  font-size: var(--text-sm);
+  color: var(--green);
+  padding: var(--space-3) var(--space-4);
+  background: var(--green-soft);
+  border: 1px solid rgba(52,201,122,0.2);
+  border-radius: var(--radius-md);
+}
+
+.spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255,255,255,0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  display: inline-block;
+}
