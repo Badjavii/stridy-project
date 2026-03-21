@@ -23,13 +23,11 @@ export default function Drawer({ open, onClose }) {
 
   return (
     <>
-      {/* Overlay oscuro */}
       <div
         className={`${styles.overlay} ${open ? styles.overlayOpen : ''}`}
         onClick={onClose}
       />
 
-      {/* Drawer panel */}
       <div className={`${styles.drawer} ${open ? styles.drawerOpen : ''}`}>
 
         <div className={styles.header}>
@@ -40,7 +38,6 @@ export default function Drawer({ open, onClose }) {
 
         <div className={styles.body}>
 
-          {/* Nav general */}
           <div className={styles.sectionLabel}>General</div>
           {NAV_ITEMS.map(item => (
             <NavLink
@@ -57,7 +54,6 @@ export default function Drawer({ open, onClose }) {
             </NavLink>
           ))}
 
-          {/* Instituciones */}
           <div className={styles.sectionRow}>
             <span className={styles.sectionLabel}>Instituciones</span>
             <button className={styles.addBtn} onClick={() => go('/institutions')}>+</button>
@@ -75,7 +71,6 @@ export default function Drawer({ open, onClose }) {
             </div>
           ))}
 
-          {/* Amigos */}
           <div className={styles.sectionRow}>
             <span className={styles.sectionLabel}>Amigos</span>
             <button className={styles.addBtn} onClick={() => go('/friends')}>+</button>
@@ -102,14 +97,25 @@ export default function Drawer({ open, onClose }) {
 
         {/* Footer */}
         <div className={styles.footer}>
-          <div className={styles.userCard} onClick={handleLogout}>
+          <div className={styles.userInfo}>
             <div className={styles.userAvatar}>
               {user?.username?.slice(1, 3).toUpperCase() ?? 'ST'}
             </div>
-            <div>
-              <div className={styles.userName}>{user?.username}</div>
-              <div className={styles.userSub}>Cerrar sesión</div>
-            </div>
+            <span className={styles.userName}>{user?.username ?? '@usuario'}</span>
+          </div>
+          <div className={styles.footerBtns}>
+            <button
+              className={styles.profileBtn}
+              onClick={() => go('/profile')}
+            >
+              ⚙ Perfil
+            </button>
+            <button
+              className={styles.logoutBtn}
+              onClick={handleLogout}
+            >
+              ↩ Salir
+            </button>
           </div>
         </div>
 
