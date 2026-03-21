@@ -1,6 +1,6 @@
 FROM node:20-alpine AS builder
 WORKDIR /app
-COPY package.json bun.lock ./
+COPY package.json ./
 RUN npm install -g bun && bun install
 COPY . .
 RUN bun run build
