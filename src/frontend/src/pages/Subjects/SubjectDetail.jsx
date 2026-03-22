@@ -294,11 +294,11 @@ export default function SubjectDetail() {
               <div
                 className={styles.gradeScore}
                 style={{
-                  background: `${g.score >= subject.passing_grade ? 'var(--green)' : 'var(--red)'}20`,
-                  color: g.score >= subject.passing_grade ? 'var(--green)' : 'var(--red)',
+                  background: `${parseFloat(g.score) >= subject.passing_grade ? 'var(--green)' : 'var(--red)'}20`,
+                  color: parseFloat(g.score) >= subject.passing_grade ? 'var(--green)' : 'var(--red)',
                 }}
               >
-                {g.score.toFixed(1)}
+                {parseFloat(g.score).toFixed(1)}
               </div>
               <div className={styles.gradeInfo}>
                 <span className={styles.gradeName}>{g.name}</span>
@@ -309,8 +309,8 @@ export default function SubjectDetail() {
                   <div
                     className={styles.progressFill}
                     style={{
-                      width: `${(g.score / 10) * 100}%`,
-                      background: g.score >= subject.passing_grade ? 'var(--green)' : 'var(--red)',
+                      width: `${(parseFloat(g.score) / 10) * 100}%`,
+                      background: parseFloat(g.score) >= subject.passing_grade ? 'var(--green)' : 'var(--red)',
                     }}
                   />
                 </div>
